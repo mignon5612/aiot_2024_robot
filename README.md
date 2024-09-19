@@ -22,3 +22,4 @@
     -print, 함수 읽는법, sep, end
 -3장
     -str class, indexing, slicing, len
+# aiot_2024_robot
