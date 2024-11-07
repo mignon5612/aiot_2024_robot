@@ -43,7 +43,11 @@ setup(
             "action_server = simpleRos.action_server:main",
             "action_client = simpleRos.action_client:main",
             "logging_example = simpleRos.logging_example:main",
-            "deadline = simpleRos.deadline:main"
+            "deadline = simpleRos.deadline:main",
+            "deadline_pub = simple_ros.deadline_pub:main",
+            "deadline_sub = simple_ros.deadline_sub:main",
+            "lifespan = simpleRos.lifespan:main",
+            "liveliness = simpleRos.liveliness:main"
             ],
     },
 )
