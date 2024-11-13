@@ -4,6 +4,9 @@ import rclpy
 import tf2_ros
 from geometry_msgs.msg import TransformStamped, Twist
 from nav_msgs.msg import Odometry
+
+# Duration
+from rclpy.duration import Duration
 from rclpy.node import Node
 from rclpy.qos import qos_profile_sensor_data
 from sensor_msgs.msg import BatteryState, Imu, LaserScan
@@ -54,7 +57,6 @@ class Move_turtle(Node):
         self.laserscan_degree = [3.5 for i in range(360)]
         self.find_wall = False
         self.tf_broadcaster = TransformBroadcaster(self)
-        self.tf_listener = None
 
     def twist_pub(self):
         self.restrain()
@@ -64,10 +66,11 @@ class Move_turtle(Node):
         self.laserscan = msg
         count = 0
         self.get_logger().info(f"self.laserscan_degree:{self.laserscan_degree}")
+        self.get_logger().info(f"self.angle_index :{self.laserscan.ranges}")
         for s_radian in self.laserscan.ranges:
             radian_index = msg.angle_min+msg.angle_increment*count
             degree_index = int(radian_index/3.141592*180)
-            if s_radian == float('inf'):
+            if s_radian == float('inf') or s_radian == 0.0:
                 s_radian = msg.range_max
             # if degree_index >= 360:
             #     degree_index = 359
@@ -150,13 +153,15 @@ class Move_turtle(Node):
             else:
                 print("follow tf")
                 follow_tf = buffer.lookup_transform("base_footprint", "follow_point", tf2_ros.Time())
+                follow_tf = buffer.lookup_transform("base_footprint", "follow_point", self.get_clock().now(), timeout = Duration(seconds=0, nanoseconds=100_000_000))
                 self.twist.angular.z = math.atan2(
                     follow_tf.transform.translation.y,
                     follow_tf.transform.translation.x)
                 self.twist.linear.x = math.sqrt(
                     follow_tf.transform.translation.x**2 +
                     follow_tf.transform.translation.y**2)
-        except Exception :
+        except Exception as e:
+            print(e)
             if not self.find_wall:
                 self.twist.linear.x = MAX_VEL/2
                 self.twist.angular.z = 0.0

@@ -29,7 +29,11 @@ setup(
         'console_scripts': [
             "move_circle = move_turtle.move_circle:main",
             "move_rect = move_turtle.move_rect:main",
-            "follow_wall = move_turtle.follow_wall:main"
+            "follow_wall = move_turtle.follow_wall:main",
+            "follow_waypoints = move_turtle.follow_waypoints:main",
+            "follow_waypoints_loop = move_turtle.follow_waypoints_loop:main",
+            "follow_ar_marker = move_turtle.follow_ar_marker:main",
+            "led_server = move_turtle.led_server:main",
         ],
     },
 )
