@@ -34,6 +34,13 @@ setup(
             "follow_waypoints_loop = move_turtle.follow_waypoints_loop:main",
             "follow_ar_marker = move_turtle.follow_ar_marker:main",
             "led_server = move_turtle.led_server:main",
+            "servo_server = move_turtle.servo_server:main",
+            "servo_sub = move_turtle.servo_sub:main",
+            "arduino_led = move_turtle.arduino_led:main",
+            "arduino_switch = move_turtle.arduino_switch:main",
+            "arduino_servo = move_turtle.arduino_servo:main",
+            "arduino_lcd = move_turtle.arduino_lcd:main"
+            "patrol_manipulator = move_turtle.patrol_manipulator:main",
         ],
     },
 )

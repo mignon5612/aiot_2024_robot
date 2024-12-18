@@ -24,7 +24,7 @@ private:
     rclcpp::Subscription<user_interface::msg::ArithmeticArgument>::SharedPtr _sub;
     void sub_callback(const user_interface::msg::ArithmeticArgument::SharedPtr msg)
     {
-        RCLCPP_INFO(get_logger(), "%d, %u", msg->stamp.sec, msg->stamp.nanosec);
+        RCLCPP_INFO(get_logger(), "%ld, %ld", msg->stamp.sec, msg->stamp.nanosec);
         RCLCPP_INFO(get_logger(), "%f", msg->argument_a);
         RCLCPP_INFO(get_logger(), "%f", msg->argument_b);
     }

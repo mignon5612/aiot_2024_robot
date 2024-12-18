@@ -186,6 +186,12 @@ ament_target_dependencies(publish_map_with_lidar
   sensor_msgs
 )
 
+add_executable(sync_async_writer src/sync_async_writer.cpp)
+ament_target_dependencies(sync_async_writer rclcpp std_msgs)
+
+add_executable(sync_async_sub src/sync_async_sub.cpp)
+ament_target_dependencies(sync_async_sub rclcpp std_msgs)
+
 install(TARGETS
   hello_pub
   hello_pub_lambda
@@ -214,6 +220,8 @@ install(TARGETS
   follow_turtle_tf
   publish_map
   publish_map_with_lidar
+  sync_async_writer
+  sync_async_sub
   DESTINATION lib/${PROJECT_NAME})
 
 install(DIRECTORY launch DESTINATION share/${PROJECT_NAME})
